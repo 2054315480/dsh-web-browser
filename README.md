@@ -31,7 +31,7 @@
 | 情况 | 填入 |
 | --- | --- |
 | 能正常访问 GitHub | `github:2054315480/dsh-web-browser` |
-| 访问 GitHub 慢或失败（推荐国内用户） | `https://gitee.com/qiuhee/dsh-web-browser` |
+| 访问 GitHub 慢或失败（推荐国内用户） | `git+https://gitee.com/qiuhee/dsh-web-browser.git` |
 | 已经下载了源码到本地 | 源码目录的绝对路径，例如 `D:\plugins\dsh-web-browser` |
 
 安装完成后：

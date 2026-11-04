@@ -1,6 +1,6 @@
 {
   "name": "@local/dsh-web-browser",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "private": true,
   "type": "module",
   "description": "Browser conversation view for DeepSeek Harness: one tab beside Chat/Trajectory, full-area browsing with tabs, optional auto-login",
