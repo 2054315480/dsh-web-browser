@@ -1,0 +1,11 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="18" cy="18" r="13.5" stroke="url(#wb-globe)" stroke-width="2"/>
+  <ellipse cx="18" cy="18" rx="6.3" ry="13.5" stroke="url(#wb-globe)" stroke-width="1.7"/>
+  <path d="M5.1 13.5h25.8M5.1 22.5h25.8" stroke="url(#wb-globe)" stroke-width="1.7"/>
+  <defs>
+    <linearGradient id="wb-globe" x1="5" y1="8" x2="31" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67C7FE"/>
+      <stop offset="1" stop-color="#3F77D8"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# local artifacts
+.tmp/
+*.log
+*.local.*
+login.seed.*
+.env*
+
+# editors / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

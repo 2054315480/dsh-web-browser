@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Browser",
+    "description": "A built-in browser as a \"Browser\" tab beside Chat/Trajectory: browse the web in the view area below the session header, one click back to the conversation."
+  }
+}

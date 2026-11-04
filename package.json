@@ -1,0 +1,50 @@
+{
+  "name": "@local/dsh-web-browser",
+  "version": "1.3.0",
+  "private": true,
+  "type": "module",
+  "description": "Browser conversation view for DeepSeek Harness: one tab beside Chat/Trajectory, full-area browsing with tabs, optional auto-login",
+  "license": "MIT",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "browser",
+    "webview"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2054315480/dsh-web-browser.git"
+  },
+  "homepage": "https://github.com/2054315480/dsh-web-browser#readme",
+  "bugs": {
+    "url": "https://github.com/2054315480/dsh-web-browser/issues"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}
