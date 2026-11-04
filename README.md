@@ -2,6 +2,8 @@
 
 给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的会话界面加一个「浏览器」标签页：紧挨着「对话」「轨迹」，在标签行下方的视图区域里直接浏览网页。
 
+> 仓库：[GitHub](https://github.com/2054315480/dsh-web-browser) · [Gitee](https://gitee.com/qiuhee/dsh-web-browser)（镜像）
+
 > 纯客户端插件，**无需构建**：`client.js` 由 DSH 的客户端模块加载器直接加载。
 
 ## 功能
