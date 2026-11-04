@@ -33,6 +33,9 @@ window.__ModuleLoader__.load({
 			'auto-login.hint': '凭据仅保存在本机',
 			'tab.new': '新建标签页',
 			'tab.close': '关闭标签页',
+			'setup.hint': '首次使用：填写 DeepSeek 账号密码，之后打开浏览器即自动登录',
+			'setup.action': '立即配置',
+			'setup.dismiss': '不再提示',
 		};
 		const en = {
 			view: 'Browser',
@@ -57,6 +60,9 @@ window.__ModuleLoader__.load({
 			'auto-login.hint': 'Stored on this device only',
 			'tab.new': 'New tab',
 			'tab.close': 'Close tab',
+			'setup.hint': 'First run: enter your DeepSeek account to enable automatic sign-in',
+			'setup.action': 'Set up now',
+			'setup.dismiss': "Don't show again",
 		};
 
 		/* ------------------------------------------------------------------ *
@@ -309,6 +315,11 @@ window.__ModuleLoader__.load({
 .wb-loginInput{box-sizing:border-box;width:100%;height:26px;padding:0 8px;border-radius:6px;border:.5px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);color:var(--dsw-alias-label-primary);font:var(--dsw-font-xxs-12)}
 .wb-loginSave{height:26px;padding:0 12px;border:0;border-radius:6px;background:var(--dsw-alias-state-business-primary);color:#fff;cursor:pointer;font:var(--dsw-font-xxs-12)}
 .wb-loginHint{color:var(--dsw-alias-label-tertiary);font:var(--dsw-font-xxs-12)}
+.wb-setup{flex:none;display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--dsw-alias-bg-layer-1);border-bottom:.5px solid var(--dsw-alias-border-l3);color:var(--dsw-alias-label-secondary);font:var(--dsw-font-xxs-12)}
+.wb-setupText{flex:auto;min-width:0}
+.wb-setupBtn{flex:none;height:24px;padding:0 10px;border:0;border-radius:6px;background:var(--dsw-alias-state-business-primary);color:#fff;cursor:pointer;font:var(--dsw-font-xxs-12)}
+.wb-setupClose{flex:none;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:4px;background:transparent;color:var(--dsw-alias-label-tertiary);cursor:pointer;padding:0}
+.wb-setupClose:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
 .wb-busy{position:absolute;top:0;left:0;right:0;height:2px;overflow:hidden;pointer-events:none;z-index:3}
 .wb-busy::after{content:'';position:absolute;top:0;height:100%;width:30%;border-radius:2px;background:var(--dsw-alias-interactive-border-active);animation:wb-slide 1.1s ease-in-out infinite}
 @keyframes wb-slide{0%{left:-30%}100%{left:100%}}
@@ -368,6 +379,9 @@ window.__ModuleLoader__.load({
 			// Open the panel on first run so the unconfigured state is obvious.
 			const [loginOpen, setLoginOpen] = useState(() => readLogin().account === '');
 			const [loginDraft, setLoginDraft] = useState(() => readLogin());
+			const [setupDismissed, setSetupDismissed] = useState(() => {
+				try { return window.localStorage.getItem('dsh-web-browser:setup-dismissed') === '1'; } catch { return false; }
+			});
 
 			const initialUrl = sessionPages.has(sessionId) ? sessionPages.get(sessionId) : readHome();
 
@@ -728,6 +742,8 @@ window.__ModuleLoader__.load({
 			};
 
 			const statusText = status === 'engine-starting' ? t('engine.starting') : status === 'engine-failed' ? t('engine.failed') : undefined;
+			// Onboarding: no stored credentials and the hint was not dismissed.
+			const needsSetup = !readLogin().account && !setupDismissed;
 
 			// `data-conversation-composer-overlay` is what makes the conversation
 			// shell bound the view area (`flex:1 1 0; min-height:0; overflow:hidden`)
@@ -794,6 +810,21 @@ window.__ModuleLoader__.load({
 				),
 				statusText !== undefined && h('div', { className: 'wb-status' }, statusText),
 				h('div', { className: 'wb-content' },
+					needsSetup && h('div', { className: 'wb-setup' },
+						h('span', { className: 'wb-setupText' }, t('setup.hint')),
+						h('button', {
+							type: 'button', className: 'wb-setupBtn',
+							onClick: () => setLoginOpen(true),
+						}, t('setup.action')),
+						h('button', {
+							type: 'button', className: 'wb-setupClose',
+							'aria-label': t('setup.dismiss'), title: t('setup.dismiss'),
+							onClick: () => {
+								setSetupDismissed(true);
+								try { window.localStorage.setItem('dsh-web-browser:setup-dismissed', '1'); } catch { /* ignore */ }
+							},
+						}, h(IconClose)),
+					),
 					loginOpen && h('div', { className: 'wb-login' },
 						h('label', { className: 'wb-loginRow' },
 							h('input', {
