@@ -6,6 +6,27 @@
 
 > 纯客户端插件，**无需构建**：`client.js` 由 DSH 的客户端模块加载器直接加载。
 
+## 界面预览
+
+| 浏览器视图 | 多标签 + 自动登录 |
+| --- | --- |
+| ![浏览器视图：会话头「对话 / 轨迹 / 浏览器」标签](docs/preview-browser.png) | ![多标签与自动登录配置](docs/preview-login.png) |
+
+> 图片为界面样式预览，实际以安装版本为准。
+
+## 使用场景：顺手问个问题，不必切浏览器
+
+在用 DeepSeek Harness 干活时，常有一些「顺口问一句」的小问题——查个报错、翻译一段文档、问问某个 API 怎么写。
+
+以前要么切到浏览器，要么先配置 API Key 才能在 DSH 里问答。
+
+现在可以直接在会话头的「浏览器」里打开 [DeepSeek 网页版](https://chat.deepseek.com/)（插件可自动登录），把它当成随手可用的问答窗口：
+
+- **不用配置 API / Key**：网页账号登录即可用，不消耗 API 配额
+- **不用切换窗口**：就在当前 DSH 窗口里，左边是你的会话，右边就是网页
+- **小问题更快**：随手一问，不必开新会话、不必等 DSH 的长回复
+- **要正经做事时**：切回「对话」标签，继续用 DSH 的完整能力
+
 ## 功能
 
 - **「浏览器」标签**：注册 `conversation.view`，与「对话」「轨迹」并排；点击即切换，点「对话」标签或工具栏 ✕ 返回聊天
@@ -138,6 +159,8 @@
 A DeepSeek Harness client plugin adding a **Browser** conversation view next to Chat/Trajectory. Render pages in an Electron `<webview>` guest on desktop (iframe fallback on plain web), hide the chat composer while active, support multiple tabs, auto-dismiss DeepSeek's environment banner, and optionally auto-fill the DeepSeek password login (credentials stay in local LocalStorage — never in this repository).
 
 **Install**: open the *Plugins* page in DSH → **Add plugin** → **Install third-party plugin** → paste `github:2054315480/dsh-web-browser` (or the Gitee URL) → install → restart DSH.
+
+**Why**: browse the web beside your DSH session — and ask DeepSeek quick questions via the web UI without configuring an API key or switching windows.
 
 ## License
 
